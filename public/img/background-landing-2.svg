@@ -1,0 +1,11 @@
+<svg width="1920" height="1080" viewBox="0 0 1920 1080" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1920" height="1080" fill="#131212"/>
+  <circle cx="1500" cy="540" r="500" fill="#f26f21" opacity="0.04" filter="blur(100px)"/>
+  <!-- Pared geométrica 3D sugerida en el fondo -->
+  <path d="M 0 0 L 800 0 L 600 1080 L 0 1080 Z" fill="#0c0b0b" opacity="0.8"/>
+  <line x1="800" y1="0" x2="600" y2="1080" stroke="#f26f21" stroke-width="2" opacity="0.1"/>
+  <!-- Marcador de Posición de Brenner en el Sofá -->
+  <rect x="1100" y="220" width="600" height="700" rx="20" fill="#1e1d1d" stroke="#333" stroke-width="4" stroke-dasharray="10 10"/>
+  <text x="1400" y="540" dominant-baseline="middle" text-anchor="middle" fill="#888888" font-family="system-ui, sans-serif" font-size="28" font-weight="bold">Brenner Vera (Foto Sofá)</text>
+  <text x="1400" y="600" dominant-baseline="middle" text-anchor="middle" fill="#555555" font-family="system-ui, sans-serif" font-size="18">Espacio para background-landing-2</text>
+</svg>

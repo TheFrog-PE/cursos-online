@@ -1,0 +1,6 @@
+<svg width="400" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="300" fill="#1f1f1f" rx="8"/>
+  <rect x="2" y="2" width="396" height="296" rx="6" stroke="#333333" stroke-width="2" stroke-dasharray="6 6"/>
+  <text x="50%" y="45%" dominant-baseline="middle" text-anchor="middle" fill="#888888" font-family="system-ui, sans-serif" font-size="16" font-weight="bold">Equipo Foto 1 (Gran Grupo)</text>
+  <text x="50%" y="55%" dominant-baseline="middle" text-anchor="middle" fill="#555555" font-family="system-ui, sans-serif" font-size="12">Marcador de posición</text>
+</svg>
