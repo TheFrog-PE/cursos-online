@@ -2,8 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import cookieParser from 'cookie-parser';
 import dotenv from 'dotenv';
-import path from 'path';
-import { fileURLToPath } from 'url';
+
 import helmet from 'helmet';
 import apiRouter from './routes/api.js';
 import { startDemoCleanupJob } from './services/demoCleanup.js';
@@ -34,21 +33,8 @@ app.get('/health', (req, res) => {
   res.status(200).json({ status: 'OK', service: 'Instituto Peruano de Compliance Web Backend', date: new Date() });
 });
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
-
 // ─── API ROUTER BINDINGS ───
 app.use('/api', apiRouter);
-
-// ─── STATIC FILE SERVING FOR PRODUCTION ───
-const NODE_ENV = process.env.NODE_ENV || 'development';
-if (NODE_ENV === 'production') {
-  const distPath = path.join(__dirname, '../../dist');
-  app.use(express.static(distPath));
-  app.get('*', (req, res) => {
-    res.sendFile(path.join(distPath, 'index.html'));
-  });
-}
 
 // ─── SERVER INITIALIZATION ───
 app.listen(PORT, () => {
