@@ -368,8 +368,6 @@ export const EspecialistaCompliancePage: React.FC = () => {
         let path = '';
         if (c.title.toLowerCase().includes('compliance')) {
           path = '/cursos/compliance';
-        } else if (c.title.toLowerCase().includes('hacker')) {
-          path = '/cursos/hacker-financiero';
         } else if (c.title.toLowerCase().includes('datos') || c.title.toLowerCase().includes('ocpd') || c.title.toLowerCase().includes('odpc')) {
           path = '/cursos/odpc';
         } else {

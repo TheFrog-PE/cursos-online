@@ -362,8 +362,6 @@ export const ODPCPage: React.FC = () => {
         let path = '';
         if (c.title.toLowerCase().includes('compliance')) {
           path = '/cursos/compliance';
-        } else if (c.title.toLowerCase().includes('hacker')) {
-          path = '/cursos/hacker-financiero';
         } else {
           path = `/cursos/${c.id}`;
         }

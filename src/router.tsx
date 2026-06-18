@@ -7,7 +7,6 @@ const LoginPage = lazy(() => import('./components/LoginPage').then(m => ({ defau
 const DashboardPage = lazy(() => import('./components/DashboardPage').then(m => ({ default: m.DashboardPage })));
 const TypingPracticePage = lazy(() => import('./components/TypingPracticePage').then(m => ({ default: m.TypingPracticePage })));
 const ProfilePage = lazy(() => import('./components/ProfilePage').then(m => ({ default: m.ProfilePage })));
-const HackerFinancieroPage = lazy(() => import('./components/HackerFinancieroPage').then(m => ({ default: m.HackerFinancieroPage })));
 const EspecialistaCompliancePage = lazy(() => import('./components/EspecialistaCompliancePage').then(m => ({ default: m.EspecialistaCompliancePage })));
 const ODPCPage = lazy(() => import('./components/ODPCPage').then(m => ({ default: m.ODPCPage })));
 const AdminDashboardPage = lazy(() => import('./components/AdminDashboardPage').then(m => ({ default: m.AdminDashboardPage })));
@@ -78,14 +77,7 @@ export const router = createBrowserRouter([
       </ProtectedRoute>
     ),
   },
-  {
-    path: '/cursos/hacker-financiero',
-    element: (
-      <ProtectedRoute>
-        {withSuspense(HackerFinancieroPage)}
-      </ProtectedRoute>
-    ),
-  },
+
   {
     path: '/cursos/:courseId',
     element: (

@@ -251,8 +251,8 @@ export const CheckoutPage: React.FC<CheckoutPageProps> = ({ onNavigateToHome, is
                 <ShieldCheck color="#000" size={40} />
               </div>
               <div>
-                <h1 style={{ color: 'var(--text-main)', fontSize: '32px', margin: '0 0 12px 0', fontWeight: 700, letterSpacing: '-0.01em', lineHeight: 1.1 }}>
-                  HACKER<br/>FINANCIERO
+                 <h1 style={{ color: 'var(--text-main)', fontSize: '24px', margin: '0 0 12px 0', fontWeight: 700, letterSpacing: '-0.01em', lineHeight: 1.2 }}>
+                  {courseTitle ? courseTitle.toUpperCase() : 'CURSO IPC'}
                 </h1>
                 <div style={{ display: 'flex', gap: '8px' }}>
                   <span style={{ backgroundColor: 'var(--bg-card)', padding: '6px 12px', borderRadius: '4px', fontSize: '10px', color: 'var(--text-dim)', fontWeight: 600, letterSpacing: '0.05em' }}>CÓDIGO DE DESCUENTO</span>

@@ -838,7 +838,7 @@ export const AdminCoursesPage: React.FC<AdminCoursesPageProps> = ({ onEditCourse
 
             <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
               {[
-                { label: 'Título del Curso', key: 'title', type: 'text', placeholder: 'Ej. Hacker Financiero Pro' },
+                { label: 'Título del Curso', key: 'title', type: 'text', placeholder: 'Ej. Derecho Corporativo y Compliance' },
                 { label: 'Descripción', key: 'description', type: 'text', placeholder: 'Descripción del curso...' },
                 { label: 'Instructor', key: 'instructor', type: 'text', placeholder: 'Nombre del instructor' },
                 { label: 'Precio', key: 'price', type: 'text', placeholder: 'Ej. $150' },

@@ -540,14 +540,14 @@ interface UserProfileModalProps {
   onStatusChange: (userId: number, newStatus: User['status']) => void;
 }
 
-const userProfiles: Record<number, { phone: string; joinDate: string; title: string; courses: { name: string; progress: number }[]; certs: { name: string; date: string; grade: string }[] }> = {
-  1: { phone: '+34 692 881 204', joinDate: '14 de Noviembre, 2023', title: 'Estudiante Elite de IPC', courses: [{ name: 'Hacker Financiero', progress: 68 }, { name: 'Especialista en Compliance', progress: 12 }], certs: [{ name: 'Estafas digitales', date: 'Completado el 12 de Enero, 2024', grade: '9.8/10' }, { name: 'Gestión de Riesgos y Derivados', date: 'Completado el 05 de Diciembre, 2023', grade: '10.0/10' }] },
-  2: { phone: '+1 555 302 8812', joinDate: '24 Oct 2024', title: 'Editor Institucional', courses: [{ name: 'Arbitraje Deportivo', progress: 45 }], certs: [] },
-  3: { phone: '+52 55 1234 5678', joinDate: '15 de Marzo, 2024', title: 'Estudiante Activo', courses: [{ name: 'Hacker Financiero', progress: 30 }, { name: 'Estafas Digitales', progress: 80 }], certs: [{ name: 'Certificación Oficial en OCPD: Protección de Datos Personales', date: 'Completado el 20 de Febrero, 2024', grade: '8.5/10' }] },
-  4: { phone: '+49 301 234 5678', joinDate: '02 de Febrero, 2024', title: 'Editor Senior', courses: [{ name: 'Bloqueo Entidad Intermedia', progress: 95 }], certs: [{ name: 'Hacker Financiero', date: 'Completado el 10 de Marzo, 2024', grade: '10.0/10' }] },
+const userProfiles: Record<string | number, { phone: string; joinDate: string; title: string; courses: { name: string; progress: number }[]; certs: { name: string; date: string; grade: string }[] }> = {
+  1: { phone: '+34 692 881 204', joinDate: '14 de Noviembre, 2023', title: 'Estudiante Elite de IPC', courses: [{ name: 'Especialista en Compliance', progress: 68 }, { name: 'Certificación Oficial en OCPD: Protección de Datos Personales', progress: 12 }], certs: [{ name: 'Introducción al Compliance', date: 'Completado el 12 de Enero, 2024', grade: '9.8/10' }, { name: 'Gestión de Riesgos', date: 'Completado el 05 de Diciembre, 2023', grade: '10.0/10' }] },
+  2: { phone: '+1 555 302 8812', joinDate: '24 Oct 2024', title: 'Editor Institucional', courses: [{ name: 'Especialista en Compliance', progress: 45 }], certs: [] },
+  3: { phone: '+52 55 1234 5678', joinDate: '15 de Marzo, 2024', title: 'Estudiante Activo', courses: [{ name: 'Certificación Oficial en OCPD: Protección de Datos Personales', progress: 80 }], certs: [{ name: 'Certificación Oficial en OCPD: Protección de Datos Personales', date: 'Completado el 20 de Febrero, 2024', grade: '8.5/10' }] },
+  4: { phone: '+49 301 234 5678', joinDate: '02 de Febrero, 2024', title: 'Editor Senior', courses: [{ name: 'Especialista en Compliance', progress: 95 }], certs: [{ name: 'Especialista en Compliance', date: 'Completado el 10 de Marzo, 2024', grade: '10.0/10' }] },
   5: { phone: '+34 611 223 344', joinDate: '30 de Octubre, 2024', title: 'Estudiante Activo', courses: [{ name: 'Especialista en Compliance', progress: 22 }], certs: [] },
-  6: { phone: '+52 33 9876 5432', joinDate: '15 de Agosto, 2024', title: 'Estudiante en Proceso', courses: [{ name: 'Hacker Financiero', progress: 15 }], certs: [] },
-  7: { phone: '+34 699 112 233', joinDate: '10 de Enero, 2024', title: 'Editor de Contenido', courses: [{ name: 'Arbitraje Avanzado', progress: 60 }], certs: [{ name: 'Arbitraje Básico', date: 'Completado el 05 de Febrero, 2024', grade: '9.5/10' }] },
+  6: { phone: '+52 33 9876 5432', joinDate: '15 de Agosto, 2024', title: 'Estudiante en Proceso', courses: [{ name: 'Certificación Oficial en OCPD: Protección de Datos Personales', progress: 15 }], certs: [] },
+  7: { phone: '+34 699 112 233', joinDate: '10 de Enero, 2024', title: 'Editor de Contenido', courses: [{ name: 'Especialista en Compliance', progress: 60 }], certs: [{ name: 'Especialista en Compliance', date: 'Completado el 05 de Febrero, 2024', grade: '9.5/10' }] },
   8: { phone: '+39 02 1234 5678', joinDate: '01 de Enero, 2024', title: 'Administradora del Sistema', courses: [], certs: [{ name: 'Certificación Admin', date: 'Completado el 15 de Enero, 2024', grade: '10.0/10' }] },
 };
 
