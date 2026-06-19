@@ -740,7 +740,7 @@ export const AdminCourseEditorPage: React.FC<AdminCourseEditorProps> = ({ course
     <div className="admin-editor-container" style={{ display: 'flex', flexDirection: 'column', width: '100%', minHeight: '100vh', backgroundColor: 'var(--bg-main)', color: 'var(--text-main)', fontFamily: 'var(--font-body)', position: 'relative' }}>
       
       {/* ── MAIN CONTENT ── */}
-      <main style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', padding: '40px 16px', overflowY: 'auto', width: '100%' }}>
+      <main style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', padding: '40px 16px', width: '100%' }}>
         
         <div style={{ maxWidth: '1440px', width: '100%', margin: '0 auto' }}>
           {/* Breadcrumb Category & Back Button */}
@@ -1594,11 +1594,11 @@ export const AdminCourseEditorPage: React.FC<AdminCourseEditorProps> = ({ course
                       modules: modules.length,
                       lastUpdated: 'Ahora'
                     })}
-                    style={{ background: 'var(--overlay-light)', border: '1px solid var(--border-color)', borderRadius: '8px', color: 'var(--text-muted)', padding: '12px 24px', fontSize: '13px', fontWeight: 700, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em' }}
+                    style={{ background: 'transparent', border: '2px solid var(--text-main)', borderRadius: '10px', color: 'var(--text-main)', padding: '12px 24px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', transition: 'all 0.2s' }}
                   >
                     Vista Previa
                   </button>
-                  <button onClick={() => handleSave()} className="btn-primary" style={{ padding: '12px 32px', borderRadius: '8px', fontSize: '13px', fontWeight: 700, cursor: 'pointer' }}>
+                  <button onClick={() => handleSave()} style={{ background: 'var(--text-main)', color: 'var(--bg-card)', border: 'none', padding: '12px 32px', borderRadius: '10px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', boxShadow: '0 8px 20px rgba(0,0,0,0.3)', transition: 'all 0.2s' }}>
                     Guardar Cambios
                   </button>
                 </div>
