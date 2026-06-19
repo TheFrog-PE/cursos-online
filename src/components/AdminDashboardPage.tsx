@@ -22,9 +22,9 @@ import { authService, courseService, paymentService, configService } from '../se
 type AdminSection = 'dashboard' | 'users' | 'courses' | 'payments' | 'settings' | 'support';
 
 const ROLE_TRANSLATIONS: Record<string, string> = {
-  'ADMIN': 'ADMINISTRADOR',
-  'STUDENT': 'ESTUDIANTE',
-  'EDITOR': 'EDITOR',
+  'ADMIN': 'Administrador',
+  'STUDENT': 'Estudiante',
+  'EDITOR': 'Editor',
 };
 
 export const AdminDashboardPage: React.FC = () => {
@@ -470,9 +470,9 @@ export const AdminDashboardPage: React.FC = () => {
                           onChange={setDashRoleFilter}
                           options={[
                             { value: "Todos", label: "Rol: Todos" },
-                            { value: "EDITOR", label: "Rol: EDITOR" },
-                            { value: "STUDENT", label: "Rol: ESTUDIANTE" },
-                            { value: "ADMIN", label: "Rol: ADMIN" }
+                            { value: "EDITOR", label: "Rol: Editor" },
+                            { value: "STUDENT", label: "Rol: Estudiante" },
+                            { value: "ADMIN", label: "Rol: Administrador" }
                           ]}
                         />
                       </div>

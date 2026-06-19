@@ -9,9 +9,9 @@ import {
 } from 'lucide-react';
 
 const ROLE_TRANSLATIONS: Record<string, string> = {
-  'ADMIN': 'ADMINISTRADOR',
-  'STUDENT': 'ESTUDIANTE',
-  'EDITOR': 'EDITOR',
+  'ADMIN': 'Administrador',
+  'STUDENT': 'Estudiante',
+  'EDITOR': 'Editor',
 };
 
 export const ProfilePage: React.FC = () => {

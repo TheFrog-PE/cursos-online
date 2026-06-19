@@ -37,9 +37,9 @@ interface AdminUsersPageProps {
 
 const ROLE_OPTIONS = ['Todos', 'EDITOR', 'STUDENT', 'ADMIN'];
 const ROLE_TRANSLATIONS: Record<string, string> = {
-  'ADMIN': 'ADMINISTRADOR',
-  'STUDENT': 'ESTUDIANTE',
-  'EDITOR': 'EDITOR',
+  'ADMIN': 'Administrador',
+  'STUDENT': 'Estudiante',
+  'EDITOR': 'Editor',
   'Todos': 'Todos los Roles'
 };
 
