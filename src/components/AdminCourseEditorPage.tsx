@@ -748,6 +748,12 @@ export const AdminCourseEditorPage: React.FC<AdminCourseEditorProps> = ({ course
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--text-muted)' }}>
               <span onClick={onBack} style={{ cursor: 'pointer', color: 'var(--text-muted)', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--text-main)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>MIS CURSOS</span> <ChevronRightIcon /> <span style={{ color: 'var(--text-main)', textTransform: 'uppercase' }}>{activeCourse.name}</span>
             </div>
+            <button
+              onClick={onBack}
+              style={{ background: '#eab308', color: '#000000', border: 'none', padding: '12px 24px', borderRadius: '10px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', boxShadow: '0 8px 20px rgba(234, 179, 8, 0.3)', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '8px' }}
+            >
+              <ArrowLeft size={16} /> Volver
+            </button>
           </div>
 
           {/* ── RESPONSIVE TWO-COLUMN EDITOR LAYOUT ── */}
@@ -1138,12 +1144,6 @@ export const AdminCourseEditorPage: React.FC<AdminCourseEditorProps> = ({ course
               
               {/* ── GLOBAL ACTION BUTTONS ── */}
               <div className="editor-action-buttons" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'flex-end', marginBottom: '24px' }}>
-                <button
-                  onClick={onBack}
-                  style={{ background: '#eab308', color: '#000000', border: 'none', padding: '12px 24px', borderRadius: '10px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', boxShadow: '0 8px 20px rgba(234, 179, 8, 0.3)', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '8px' }}
-                >
-                  <ArrowLeft size={16} /> Volver
-                </button>
                 <button
                   onClick={() => setPreviewingCourse({
                     id: activeCourseId,
