@@ -746,14 +746,8 @@ export const AdminCourseEditorPage: React.FC<AdminCourseEditorProps> = ({ course
           {/* Breadcrumb Category & Back Button */}
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--text-muted)' }}>
-              MIS CURSOS <ChevronRightIcon /> <span style={{ color: 'var(--text-main)', textTransform: 'uppercase' }}>{activeCourse.name}</span>
+              <span onClick={onBack} style={{ cursor: 'pointer', color: 'var(--text-muted)', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--text-main)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>MIS CURSOS</span> <ChevronRightIcon /> <span style={{ color: 'var(--text-main)', textTransform: 'uppercase' }}>{activeCourse.name}</span>
             </div>
-            <button
-              onClick={onBack}
-              className="btn-volver-admin"
-            >
-              <ArrowLeft size={12} /> Volver
-            </button>
           </div>
 
           {/* ── RESPONSIVE TWO-COLUMN EDITOR LAYOUT ── */}
@@ -1129,22 +1123,7 @@ export const AdminCourseEditorPage: React.FC<AdminCourseEditorProps> = ({ course
                     {/* Dashed Module Add Button */}
                     <button
                       onClick={addModule}
-                      style={{
-                        width: '100%',
-                        padding: '12px',
-                        backgroundColor: 'transparent',
-                        border: '1px dashed var(--overlay-medium)',
-                        borderRadius: '10px',
-                        color: 'var(--text-muted)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '6px',
-                        fontSize: '11px',
-                        fontWeight: 700,
-                        cursor: 'pointer',
-                        letterSpacing: '0.05em'
-                      }}
+                      className="btn-nuevo-curso-admin"
                     >
                       <Plus size={12} /> NUEVO MÓDULO
                     </button>
@@ -1158,7 +1137,13 @@ export const AdminCourseEditorPage: React.FC<AdminCourseEditorProps> = ({ course
             <div className="editor-right-column" style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
               
               {/* ── GLOBAL ACTION BUTTONS ── */}
-              <div className="editor-action-buttons" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'flex-end', marginBottom: '24px' }}>
+              <div className="editor-action-buttons" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'flex-start', marginBottom: '24px' }}>
+                <button
+                  onClick={onBack}
+                  style={{ background: '#eab308', color: '#000000', border: 'none', padding: '12px 24px', borderRadius: '10px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', boxShadow: '0 8px 20px rgba(234, 179, 8, 0.3)', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '8px' }}
+                >
+                  <ArrowLeft size={16} /> Volver
+                </button>
                 <button
                   onClick={() => setPreviewingCourse({
                     id: activeCourseId,
@@ -1173,11 +1158,11 @@ export const AdminCourseEditorPage: React.FC<AdminCourseEditorProps> = ({ course
                     modules: modules.length,
                     lastUpdated: 'Ahora'
                   })}
-                  style={{ background: 'transparent', border: '2px solid var(--text-main)', borderRadius: '10px', color: 'var(--text-main)', padding: '12px 24px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', transition: 'all 0.2s' }}
+                  style={{ background: 'transparent', border: '2px solid var(--primary)', borderRadius: '10px', color: 'var(--primary)', padding: '12px 24px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', transition: 'all 0.2s' }}
                 >
                   Vista Previa
                 </button>
-                <button onClick={() => handleSave()} style={{ background: 'var(--text-main)', color: 'var(--bg-card)', border: 'none', padding: '12px 32px', borderRadius: '10px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', boxShadow: '0 8px 20px rgba(0,0,0,0.3)', transition: 'all 0.2s' }}>
+                <button onClick={() => handleSave()} style={{ background: '#10b981', color: '#ffffff', border: 'none', padding: '12px 32px', borderRadius: '10px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', boxShadow: '0 8px 20px rgba(16, 185, 129, 0.3)', transition: 'all 0.2s' }}>
                   Guardar Cambios
                 </button>
               </div>
