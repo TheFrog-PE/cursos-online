@@ -38,11 +38,11 @@ const handleToolbarAction = (
           if (trimmed.startsWith('-') || trimmed.startsWith('*') || trimmed.startsWith('•')) {
             return line;
           }
-          return `- ${line}`;
+          return `• ${line}`;
         })
         .join('\n');
     } else {
-      replacement = `- ${selectedText || 'punto'}`;
+      replacement = selectedText ? `• ${selectedText}` : `• `;
     }
   }
 
@@ -1736,7 +1736,11 @@ export const AdminCourseEditorPage: React.FC<AdminCourseEditorProps> = ({ course
               </div>
 
               {/* Add Sub-module button */}
-              <button onClick={() => activeModule && addSubModule(activeModule.id)} style={{ width: '100%', padding: '18px', marginBottom: '32px', background: 'transparent', border: '1px solid var(--border-color)', borderRadius: '12px', color: 'var(--text-muted)', fontSize: '11px', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', fontWeight: 700, letterSpacing: '0.05em' }}>
+              <button 
+                onClick={() => activeModule && addSubModule(activeModule.id)} 
+                className="btn-nuevo-curso-admin"
+                style={{ marginBottom: '32px', letterSpacing: '0.05em', fontWeight: 700 }}
+              >
                 <Plus size={14} /> AÑADIR NUEVO SUB-MÓDULO
               </button>
 
