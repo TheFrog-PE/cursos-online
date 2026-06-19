@@ -748,12 +748,6 @@ export const AdminCourseEditorPage: React.FC<AdminCourseEditorProps> = ({ course
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '12px', fontWeight: 700, letterSpacing: '0.12em', color: 'var(--text-muted)' }}>
               <span onClick={onBack} style={{ cursor: 'pointer', color: 'var(--text-muted)', transition: 'color 0.2s' }} onMouseEnter={e => e.currentTarget.style.color = 'var(--text-main)'} onMouseLeave={e => e.currentTarget.style.color = 'var(--text-muted)'}>MIS CURSOS</span> <ChevronRightIcon /> <span style={{ color: 'var(--text-main)', textTransform: 'uppercase' }}>{activeCourse.name}</span>
             </div>
-            <button
-              onClick={onBack}
-              style={{ background: '#eab308', color: '#000000', border: 'none', padding: '12px 24px', borderRadius: '10px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', boxShadow: '0 8px 20px rgba(234, 179, 8, 0.3)', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '8px' }}
-            >
-              <ArrowLeft size={16} /> Volver
-            </button>
           </div>
 
           {/* ── RESPONSIVE TWO-COLUMN EDITOR LAYOUT ── */}
@@ -1143,28 +1137,36 @@ export const AdminCourseEditorPage: React.FC<AdminCourseEditorProps> = ({ course
             <div className="editor-right-column" style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
               
               {/* ── GLOBAL ACTION BUTTONS ── */}
-              <div className="editor-action-buttons" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'flex-end', marginBottom: '24px' }}>
+              <div className="editor-action-buttons" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'space-between', marginBottom: '24px' }}>
                 <button
-                  onClick={() => setPreviewingCourse({
-                    id: activeCourseId,
-                    title: activeCourse.name,
-                    category: activeCourseId === 1 || activeCourseId === 2 ? 'Arbitraje' : 'Finanzas',
-                    instructor: 'Instituto Peruano de Compliance',
-                    students: activeCourseId === 1 ? 1284 : activeCourseId === 2 ? 842 : 1284,
-                    duration: activeCourseId === 1 ? '15h 30m' : activeCourseId === 2 ? '12h 00m' : '15h 30m',
-                    rating: activeCourseId === 1 ? 4.9 : activeCourseId === 2 ? 4.8 : 4.9,
-                    status: 'Publicado',
-                    price: activeCourseId === 1 ? '$150' : activeCourseId === 2 ? '$200' : '$150',
-                    modules: modules.length,
-                    lastUpdated: 'Ahora'
-                  })}
-                  style={{ background: 'transparent', border: '2px solid var(--primary)', borderRadius: '10px', color: 'var(--primary)', padding: '12px 24px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', transition: 'all 0.2s' }}
+                  onClick={onBack}
+                  style={{ background: '#eab308', color: '#000000', border: 'none', padding: '12px 24px', borderRadius: '10px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', boxShadow: '0 8px 20px rgba(234, 179, 8, 0.3)', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '8px' }}
                 >
-                  Vista Previa
+                  <ArrowLeft size={16} /> Volver
                 </button>
-                <button onClick={() => handleSave()} style={{ background: '#10b981', color: '#ffffff', border: 'none', padding: '12px 32px', borderRadius: '10px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', boxShadow: '0 8px 20px rgba(16, 185, 129, 0.3)', transition: 'all 0.2s' }}>
-                  Guardar Cambios
-                </button>
+                <div style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
+                  <button
+                    onClick={() => setPreviewingCourse({
+                      id: activeCourseId,
+                      title: activeCourse.name,
+                      category: activeCourseId === 1 || activeCourseId === 2 ? 'Arbitraje' : 'Finanzas',
+                      instructor: 'Instituto Peruano de Compliance',
+                      students: activeCourseId === 1 ? 1284 : activeCourseId === 2 ? 842 : 1284,
+                      duration: activeCourseId === 1 ? '15h 30m' : activeCourseId === 2 ? '12h 00m' : '15h 30m',
+                      rating: activeCourseId === 1 ? 4.9 : activeCourseId === 2 ? 4.8 : 4.9,
+                      status: 'Publicado',
+                      price: activeCourseId === 1 ? '$150' : activeCourseId === 2 ? '$200' : '$150',
+                      modules: modules.length,
+                      lastUpdated: 'Ahora'
+                    })}
+                    style={{ background: 'transparent', border: '2px solid var(--primary)', borderRadius: '10px', color: 'var(--primary)', padding: '12px 24px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', transition: 'all 0.2s' }}
+                  >
+                    Vista Previa
+                  </button>
+                  <button onClick={() => handleSave()} style={{ background: '#10b981', color: '#ffffff', border: 'none', padding: '12px 32px', borderRadius: '10px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', boxShadow: '0 8px 20px rgba(16, 185, 129, 0.3)', transition: 'all 0.2s' }}>
+                    Guardar Cambios
+                  </button>
+                </div>
               </div>
 
               {/* ── CONFIGURACIÓN GENERAL DEL CURSO ── */}
