@@ -737,7 +737,7 @@ export const AdminCourseEditorPage: React.FC<AdminCourseEditorProps> = ({ course
   const displayModuleNumber = activeModuleIndex !== -1 ? activeModuleIndex + 1 : 1;
 
   return (
-    <div className="admin-editor-container" style={{ display: 'flex', flexDirection: 'column', width: '100%', minHeight: '100vh', backgroundColor: 'var(--bg-main)', color: 'var(--text-main)', fontFamily: 'var(--font-body)', position: 'relative', overflowX: 'hidden' }}>
+    <div className="admin-editor-container" style={{ display: 'flex', flexDirection: 'column', width: '100%', minHeight: '100vh', backgroundColor: 'var(--bg-main)', color: 'var(--text-main)', fontFamily: 'var(--font-body)', position: 'relative' }}>
       
       {/* ── MAIN CONTENT ── */}
       <main style={{ flexGrow: 1, display: 'flex', flexDirection: 'column', padding: '40px 16px', overflowY: 'auto', width: '100%' }}>

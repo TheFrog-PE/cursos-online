@@ -878,11 +878,11 @@ export const AdminCoursesPage: React.FC<AdminCoursesPageProps> = ({ onEditCourse
               </div>
             </div>
 
-            <div style={{ display: 'flex', gap: '12px', marginTop: '28px' }}>
-              <button onClick={() => setShowModal(false)} style={{ flex: 1, padding: '12px', borderRadius: '8px', backgroundColor: 'var(--overlay-light)', border: '1px solid var(--border-color)', color: 'var(--text-muted)', fontSize: '13px', fontWeight: 600, cursor: 'pointer' }}>
+            <div style={{ display: 'flex', gap: '12px', marginTop: '32px' }}>
+              <button onClick={() => setShowModal(false)} style={{ flex: 1, padding: '14px', borderRadius: '10px', backgroundColor: 'transparent', border: '2px solid var(--text-main)', color: 'var(--text-main)', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', transition: 'all 0.2s' }}>
                 Cancelar
               </button>
-              <button onClick={handleSave} className="btn-primary" style={{ flex: 1, padding: '12px', borderRadius: '8px', fontSize: '13px', fontWeight: 700, justifyContent: 'center' }}>
+              <button onClick={handleSave} style={{ flex: 1, padding: '14px', borderRadius: '10px', backgroundColor: 'var(--text-main)', color: 'var(--bg-card)', border: 'none', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', display: 'flex', justifyContent: 'center', alignItems: 'center', transition: 'all 0.2s', boxShadow: '0 8px 20px rgba(0,0,0,0.3)' }}>
                 {editCourse ? 'Guardar Cambios' : 'Crear Curso'}
               </button>
             </div>
