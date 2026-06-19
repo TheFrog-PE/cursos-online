@@ -1157,6 +1157,31 @@ export const AdminCourseEditorPage: React.FC<AdminCourseEditorProps> = ({ course
             {/* ── RIGHT COLUMN: ACTIVE MODULE EDITOR ── */}
             <div className="editor-right-column" style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
               
+              {/* ── GLOBAL ACTION BUTTONS ── */}
+              <div className="editor-action-buttons" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'flex-end', marginBottom: '24px' }}>
+                <button
+                  onClick={() => setPreviewingCourse({
+                    id: activeCourseId,
+                    title: activeCourse.name,
+                    category: activeCourseId === 1 || activeCourseId === 2 ? 'Arbitraje' : 'Finanzas',
+                    instructor: 'Instituto Peruano de Compliance',
+                    students: activeCourseId === 1 ? 1284 : activeCourseId === 2 ? 842 : 1284,
+                    duration: activeCourseId === 1 ? '15h 30m' : activeCourseId === 2 ? '12h 00m' : '15h 30m',
+                    rating: activeCourseId === 1 ? 4.9 : activeCourseId === 2 ? 4.8 : 4.9,
+                    status: 'Publicado',
+                    price: activeCourseId === 1 ? '$150' : activeCourseId === 2 ? '$200' : '$150',
+                    modules: modules.length,
+                    lastUpdated: 'Ahora'
+                  })}
+                  style={{ background: 'transparent', border: '2px solid var(--text-main)', borderRadius: '10px', color: 'var(--text-main)', padding: '12px 24px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', transition: 'all 0.2s' }}
+                >
+                  Vista Previa
+                </button>
+                <button onClick={() => handleSave()} style={{ background: 'var(--text-main)', color: 'var(--bg-card)', border: 'none', padding: '12px 32px', borderRadius: '10px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', boxShadow: '0 8px 20px rgba(0,0,0,0.3)', transition: 'all 0.2s' }}>
+                  Guardar Cambios
+                </button>
+              </div>
+
               {/* ── CONFIGURACIÓN GENERAL DEL CURSO ── */}
               <div className="glass-panel admin-general-config-panel" style={{
                 borderRadius: '16px',
@@ -1578,30 +1603,6 @@ export const AdminCourseEditorPage: React.FC<AdminCourseEditorProps> = ({ course
                 <h1 style={{ fontSize: 'clamp(20px, 5.5vw, 28px)', fontWeight: 800, margin: '0 0 24px 0', letterSpacing: '-0.01em', color: 'var(--text-main)', fontFamily: 'var(--font-title)', textTransform: 'uppercase', wordBreak: 'break-word', whiteSpace: 'normal', lineHeight: '1.2' }}>
                   {activeModule?.title || 'SIN TÍTULO'}
                 </h1>
-                
-                <div className="editor-action-buttons" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap' }}>
-                  <button
-                    onClick={() => setPreviewingCourse({
-                      id: activeCourseId,
-                      title: activeCourse.name,
-                      category: activeCourseId === 1 || activeCourseId === 2 ? 'Arbitraje' : 'Finanzas',
-                      instructor: 'Instituto Peruano de Compliance',
-                      students: activeCourseId === 1 ? 1284 : activeCourseId === 2 ? 842 : 1284,
-                      duration: activeCourseId === 1 ? '15h 30m' : activeCourseId === 2 ? '12h 00m' : '15h 30m',
-                      rating: activeCourseId === 1 ? 4.9 : activeCourseId === 2 ? 4.8 : 4.9,
-                      status: 'Publicado',
-                      price: activeCourseId === 1 ? '$150' : activeCourseId === 2 ? '$200' : '$150',
-                      modules: modules.length,
-                      lastUpdated: 'Ahora'
-                    })}
-                    style={{ background: 'transparent', border: '2px solid var(--text-main)', borderRadius: '10px', color: 'var(--text-main)', padding: '12px 24px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', transition: 'all 0.2s' }}
-                  >
-                    Vista Previa
-                  </button>
-                  <button onClick={() => handleSave()} style={{ background: 'var(--text-main)', color: 'var(--bg-card)', border: 'none', padding: '12px 32px', borderRadius: '10px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', boxShadow: '0 8px 20px rgba(0,0,0,0.3)', transition: 'all 0.2s' }}>
-                    Guardar Cambios
-                  </button>
-                </div>
               </div>
 
               {/* Video Player Card */}
