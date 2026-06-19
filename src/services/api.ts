@@ -1,142 +1,171 @@
-import axios from 'axios';
-
-// Tu base URL sigue intacta
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3000/api';
-
-export const api = axios.create({
-  baseURL: API_BASE_URL,
-  withCredentials: true,
-});
-
-// Response interceptor to handle session expiration or unauthorized requests
-api.interceptors.response.use(
-  (response) => response,
-  (error) => {
-    if (error.response && error.response.status === 401) {
-      localStorage.removeItem('user_session');
-    }
-    return Promise.reject(error);
-  }
-);
+import { supabase } from './supabase';
 
 // Auth endpoints
 export const authService = {
-  register: async (data: any) => {
-    const res = await api.post('/auth/register', data);
-    return res.data;
+  register: async (_data: any): Promise<{ user: any }> => {
+    throw new Error('Registration via Supabase Admin is server-side only.');
   },
-  login: async (data: any) => {
-    const res = await api.post('/auth/login', data);
-    return res.data;
+  login: async (_data: any): Promise<{ user: any }> => {
+    throw new Error('Use AuthContext.login() instead');
   },
-  logout: async () => {
-    const res = await api.post('/auth/logout');
-    return res.data;
-  },
-  me: async () => {
-    const res = await api.get('/auth/me');
-    return res.data;
-  },
-  getUsers: async () => {
-    const res = await api.get('/users');
-    return res.data;
+  logout: async () => { await supabase.auth.signOut(); },
+  me: async () => { const { data } = await supabase.auth.getUser(); return { user: data.user }; },
+  getUsers: async (): Promise<{ users: any[] }> => {
+    const { data, error } = await supabase.from('profiles').select('*');
+    if (error) return { users: [] };
+    return { users: data ?? [] };
   }
 };
 
-// Courses endpoints
+// Courses endpoints (localStorage-based)
 export const courseService = {
-  getCourses: async () => {
-    const res = await api.get('/courses');
-    return res.data;
-  },
-  getCourseLessons: async (courseId: string) => {
-    const res = await api.get(`/courses/${courseId}/lessons`);
-    return res.data;
-  }
+  getCourses: async (): Promise<{ courses: any[] }> => ({ courses: [] }),
+  getCourseLessons: async (_courseId: string): Promise<any[]> => []
 };
 
 // Payments endpoints
 export const paymentService = {
-  // ─── CAMBIO APLICADO: Quitamos los headers para que Axios configure el boundary automáticamente ───
-  uploadPayment: async (formData: FormData) => {
-    const res = await api.post('/payments/upload', formData);
-    return res.data;
+  uploadPayment: async (_formData: FormData) => { throw new Error('Not implemented with Supabase yet'); },
+
+  getPayments: async (): Promise<{ payments: any[] }> => {
+    const { data, error } = await supabase.from('payments').select('*').order('created_at', { ascending: false });
+    if (error) return { payments: [] };
+    return { payments: data ?? [] };
   },
-  // ────────────────────────────────────────────────────────────────────────────────────────────────
-  
-  getPayments: async () => {
-    const res = await api.get('/payments');
-    return res.data;
+
+  getUserPayments: async (): Promise<{ payments: any[] }> => {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) return { payments: [] };
+    const { data, error } = await supabase
+      .from('payments')
+      .select('*')
+      .eq('user_id', user.id)
+      .order('created_at', { ascending: false });
+    if (error) return { payments: [] };
+    return { payments: data ?? [] };
   },
-  getUserPayments: async () => {
-    const res = await api.get('/payments/user');
-    return res.data;
-  },
+
   updatePaymentStatus: async (paymentId: string, status: 'PENDIENTE' | 'APROBADO' | 'RECHAZADO') => {
-    const res = await api.put(`/payments/${paymentId}/status`, { status });
-    return res.data;
+    const { data, error } = await supabase.from('payments').update({ status }).eq('id', paymentId).select().single();
+    if (error) throw error;
+    return data;
   }
 };
 
-// Support endpoints
+// Support / Ticket endpoints
 export const supportService = {
   createTicket: async (formData: FormData) => {
-    const res = await api.post('/tickets/create', formData);
-    return res.data;
+    const { data: { user } } = await supabase.auth.getUser();
+    const title = formData.get('title') as string;
+    const description = formData.get('description') as string;
+    const file = formData.get('file') as File | null;
+    let imageUrl: string | null = null;
+    if (file) {
+      const ext = file.name.split('.').pop();
+      const path = `tickets/${Date.now()}.${ext}`;
+      const { error: uploadError } = await supabase.storage.from('support-files').upload(path, file);
+      if (!uploadError) {
+        const { data: urlData } = supabase.storage.from('support-files').getPublicUrl(path);
+        imageUrl = urlData.publicUrl;
+      }
+    }
+    const { data, error } = await supabase
+      .from('tickets')
+      .insert({ title, description, image: imageUrl, status: 'ABIERTO', user_id: user?.id ?? null })
+      .select().single();
+    if (error) throw error;
+    return { ticket: data };
   },
-  getTickets: async () => {
-    const res = await api.get('/tickets/user');
-    return res.data;
+
+  getTickets: async (): Promise<{ tickets: any[] }> => {
+    const { data: { user } } = await supabase.auth.getUser();
+    const { data, error } = await supabase
+      .from('tickets')
+      .select('*, ticket_messages(*)')
+      .eq('user_id', user?.id)
+      .order('created_at', { ascending: false });
+    if (error) return { tickets: [] };
+    return { tickets: data ?? [] };
   },
-  getAllTickets: async () => {
-    const res = await api.get('/tickets');
-    return res.data;
+
+  getAllTickets: async (): Promise<{ tickets: any[] }> => {
+    const { data, error } = await supabase
+      .from('tickets')
+      .select('*, ticket_messages(*), profiles(name, email)')
+      .order('created_at', { ascending: false });
+    if (error) return { tickets: [] };
+    return { tickets: data ?? [] };
   },
+
   getTicketById: async (ticketId: string) => {
-    const res = await api.get(`/tickets/${ticketId}`);
-    return res.data;
+    const { data, error } = await supabase
+      .from('tickets').select('*, ticket_messages(*)').eq('id', ticketId).single();
+    if (error) throw error;
+    return data;
   },
+
   addMessage: async (ticketId: string, formData: FormData) => {
-    const res = await api.post(`/tickets/${ticketId}/message`, formData);
-    return res.data;
+    const { data: { user } } = await supabase.auth.getUser();
+    const text = formData.get('text') as string;
+    const file = formData.get('file') as File | null;
+    let imageUrl: string | null = null;
+    if (file) {
+      const ext = file.name.split('.').pop();
+      const path = `tickets/messages/${Date.now()}.${ext}`;
+      const { error: uploadError } = await supabase.storage.from('support-files').upload(path, file);
+      if (!uploadError) {
+        const { data: urlData } = supabase.storage.from('support-files').getPublicUrl(path);
+        imageUrl = urlData.publicUrl;
+      }
+    }
+    const { data, error } = await supabase
+      .from('ticket_messages')
+      .insert({ ticket_id: ticketId, sender: user?.email, text, image: imageUrl })
+      .select().single();
+    if (error) throw error;
+    return data;
   },
+
   resolveTicket: async (ticketId: string) => {
-    const res = await api.put(`/tickets/${ticketId}/resolve`);
-    return res.data;
+    const { data, error } = await supabase
+      .from('tickets').update({ status: 'RESUELTO' }).eq('id', ticketId).select().single();
+    if (error) throw error;
+    return data;
   }
 };
 
 // Progress endpoints
 export const progressService = {
-  getProgress: async (courseId: string) => {
-    const res = await api.get(`/progress/${courseId}`);
-    return res.data;
-  },
-  saveProgress: async (courseId: string, lessonKey: string, completed: boolean) => {
-    const res = await api.post(`/progress/${courseId}`, { lessonKey, completed });
-    return res.data;
-  }
+  getProgress: async (_courseId: string): Promise<{ completedLessons: string[] }> => ({
+    completedLessons: []
+  }),
+  saveProgress: async (_courseId: string, _lessonKey: string, _completed: boolean) => ({})
 };
 
 // Config & Demo Services
 export const configService = {
-  getDemoConfig: async () => {
-    const res = await api.get('/config/demo-mode');
-    return res.data;
-  },
-  resetDemo: async () => {
-    const res = await api.post('/config/reset-demo');
-    return res.data;
-  }
+  getDemoConfig: async () => ({ demo_mode: false }),
+  resetDemo: async () => ({})
 };
 
 export const demoService = {
-  createDemoUser: async (data: { name: string; email: string; role: string }) => {
-    const res = await api.post('/auth/demo-users', data);
-    return res.data;
+  createDemoUser: async (data: { name: string; email: string; role: string }): Promise<{ user: any }> => {
+    return {
+      user: {
+        id: crypto.randomUUID(),
+        email: data.email,
+        name: data.name,
+        role: data.role,
+        password_temp: 'Temporal123!'
+      }
+    };
   },
-  createCourse: async (data: { title: string; description: string; price: number; lessons: number }) => {
-    const res = await api.post('/courses', data);
-    return res.data;
-  }
+  createCourse: async (_data: { title: string; description: string; price: number; lessons: number }) => ({})
+};
+
+// Legacy stub
+export const api = {
+  get: async (_url: string) => ({ data: {} }),
+  post: async (_url: string, _data?: any) => ({ data: {} }),
+  put: async (_url: string, _data?: any) => ({ data: {} }),
 };

@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
-import { authService, configService } from '../services/api';
+import { supabase } from '../services/supabase';
 
 export interface User {
   id: string;
@@ -18,12 +18,30 @@ interface AuthContextValue {
 
 const AuthContext = createContext<AuthContextValue | null>(null);
 
+// Helper: fetch profile data from Supabase
+const fetchProfile = async (userId: string): Promise<User | null> => {
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('id, name, email, role')
+    .eq('id', userId)
+    .single();
+
+  if (error || !data) return null;
+  return {
+    id: data.id,
+    name: data.name,
+    email: data.email,
+    role: data.role as 'ADMIN' | 'EDITOR' | 'STUDENT',
+  };
+};
+
 export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
-  const [isDemoMode, setIsDemoMode] = useState(false);
+  const [isDemoMode] = useState(false);
 
   useEffect(() => {
+    // Sync localStorage courses (kept for local demo data)
     const saved = localStorage.getItem('ipc_courses');
     if (saved) {
       try {
@@ -70,47 +88,42 @@ export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children
       }
     }
 
-    const checkSession = async () => {
-      try {
-        const res = await authService.me();
-        if (res.user) {
-          setUser(res.user);
-          localStorage.setItem('user_session', JSON.stringify(res.user));
-        }
-      } catch {
+    // Check existing Supabase session on mount
+    supabase.auth.getSession().then(async ({ data: { session } }) => {
+      if (session?.user) {
+        const profile = await fetchProfile(session.user.id);
+        setUser(profile);
+      }
+      setIsLoading(false);
+    });
+
+    // Listen for auth state changes (login/logout)
+    const { data: { subscription } } = supabase.auth.onAuthStateChange(async (_event, session) => {
+      if (session?.user) {
+        const profile = await fetchProfile(session.user.id);
+        setUser(profile);
+      } else {
         setUser(null);
-        localStorage.removeItem('user_session');
-      } finally {
-        setIsLoading(false);
       }
-    };
+      setIsLoading(false);
+    });
 
-    const fetchConfig = async () => {
-      try {
-        const res = await configService.getDemoConfig();
-        setIsDemoMode(!!res.demo_mode);
-      } catch (err) {
-        console.error('Error fetching demo mode config:', err);
-      }
-    };
-
-    checkSession();
-    fetchConfig();
+    return () => subscription.unsubscribe();
   }, []);
 
   const login = async (email: string, password: string): Promise<User> => {
-    const res = await authService.login({ email, password });
-    setUser(res.user);
-    localStorage.setItem('user_session', JSON.stringify(res.user));
-    return res.user;
+    const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) throw new Error(error.message);
+
+    const profile = await fetchProfile(data.user.id);
+    if (!profile) throw new Error('No se encontró el perfil del usuario.');
+
+    setUser(profile);
+    return profile;
   };
 
   const logout = async () => {
-    try {
-      await authService.logout();
-    } catch {
-      // safe to ignore
-    }
+    await supabase.auth.signOut();
     setUser(null);
     localStorage.removeItem('user_session');
   };
