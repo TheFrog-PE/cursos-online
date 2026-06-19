@@ -1137,7 +1137,7 @@ export const AdminCourseEditorPage: React.FC<AdminCourseEditorProps> = ({ course
             <div className="editor-right-column" style={{ display: 'flex', flexDirection: 'column', minWidth: 0 }}>
               
               {/* ── GLOBAL ACTION BUTTONS ── */}
-              <div className="editor-action-buttons" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'flex-start', marginBottom: '24px' }}>
+              <div className="editor-action-buttons" style={{ display: 'flex', gap: '12px', flexWrap: 'wrap', justifyContent: 'flex-end', marginBottom: '24px' }}>
                 <button
                   onClick={onBack}
                   style={{ background: '#eab308', color: '#000000', border: 'none', padding: '12px 24px', borderRadius: '10px', fontSize: '14px', fontWeight: 800, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em', boxShadow: '0 8px 20px rgba(234, 179, 8, 0.3)', transition: 'all 0.2s', display: 'flex', alignItems: 'center', gap: '8px' }}
