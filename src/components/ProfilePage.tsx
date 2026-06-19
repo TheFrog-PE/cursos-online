@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
 import { StudentSidebar } from './StudentSidebar';
 import { StudentHeader } from './StudentHeader';
+import { CustomSelect } from './CustomSelect';
 import { 
   Edit2, Eye, EyeOff, MapPin, Fingerprint, Lock, Headphones
 } from 'lucide-react';
@@ -225,11 +226,16 @@ export const ProfilePage: React.FC = () => {
                   <div style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
                     <div>
                       <label style={labelStyle}>CIUDAD / PAÍS</label>
-                      <select style={{ ...inputStyle, appearance: 'none' }} value={country} onChange={e => setCountry(e.target.value)}>
-                        <option value="PERÚ">PERÚ</option>
-                        <option value="MÉXICO">MÉXICO</option>
-                        <option value="COLOMBIA">COLOMBIA</option>
-                      </select>
+                      <CustomSelect
+                        value={country}
+                        onChange={setCountry}
+                        style={{ width: '100%', minWidth: '100%', height: '44px' }}
+                        options={[
+                          { value: "PERÚ", label: "PERÚ" },
+                          { value: "MÉXICO", label: "MÉXICO" },
+                          { value: "COLOMBIA", label: "COLOMBIA" }
+                        ]}
+                      />
                     </div>
                     <div>
                       <label style={labelStyle}>DNI</label>
@@ -251,11 +257,16 @@ export const ProfilePage: React.FC = () => {
                     </div>
                     <div>
                       <label style={labelStyle}>GÉNERO</label>
-                      <select style={{ ...inputStyle, appearance: 'none' }} value={gender} onChange={e => setGender(e.target.value)}>
-                        <option value="Masculine">Masculino</option>
-                        <option value="Feminine">Femenino</option>
-                        <option value="Other">Otro</option>
-                      </select>
+                      <CustomSelect
+                        value={gender}
+                        onChange={setGender}
+                        style={{ width: '100%', minWidth: '100%', height: '44px' }}
+                        options={[
+                          { value: "Masculine", label: "Masculino" },
+                          { value: "Feminine", label: "Femenino" },
+                          { value: "Other", label: "Otro" }
+                        ]}
+                      />
                     </div>
                   </div>
                 </div>

@@ -3,6 +3,7 @@ import { Mail, Lock, Eye, EyeOff, GraduationCap } from 'lucide-react';
 import { authService } from '../services/api';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { CustomSelect } from './CustomSelect';
 
 
 export const LoginPage: React.FC = () => {
@@ -470,12 +471,17 @@ export const LoginPage: React.FC = () => {
                     
                     <div className="resp-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '16px' }}>
                       <input type="date" required style={{...inputStyle, color: 'var(--text-muted)'}} value={regBirthdate} onChange={(e) => setRegBirthdate(e.target.value)} />
-                      <select required style={{...inputStyle, appearance: 'none', color: 'var(--text-muted)'}} value={regGender} onChange={(e) => setRegGender(e.target.value)}>
-                        <option value="" disabled>Género</option>
-                        <option value="m">Masculino</option>
-                        <option value="f">Femenino</option>
-                        <option value="o">Otro</option>
-                      </select>
+                      <CustomSelect
+                        value={regGender}
+                        onChange={setRegGender}
+                        placeholder="Género"
+                        style={{ width: '100%', minWidth: '100%', height: '52px' }}
+                        options={[
+                          { value: "m", label: "Masculino" },
+                          { value: "f", label: "Femenino" },
+                          { value: "o", label: "Otro" }
+                        ]}
+                      />
                     </div>
 
                     <div style={{ position: 'relative' }}>

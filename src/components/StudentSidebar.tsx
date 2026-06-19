@@ -19,6 +19,7 @@ import {
 import { ThemeToggle } from './ThemeToggle';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../contexts/AuthContext';
+import { CustomSelect } from './CustomSelect';
 
 interface StudentSidebarProps {
   sidebarOpen?: boolean;
@@ -142,29 +143,19 @@ export const StudentSidebar: React.FC<StudentSidebarProps> = ({
 
               <div style={{ padding: '16px 0', borderTop: '1px solid var(--overlay-light)', display: 'flex', flexDirection: 'column', gap: '8px' }}>
                 <ThemeToggle />
-                <select
+                <CustomSelect
                   value={localStorage.getItem('ipc_lang') || 'es'}
-                  onChange={(e) => {
-                    localStorage.setItem('ipc_lang', e.target.value);
+                  onChange={(val) => {
+                    localStorage.setItem('ipc_lang', val);
                     window.dispatchEvent(new Event('storage'));
                     window.location.reload();
                   }}
-                  style={{
-                    width: '100%',
-                    padding: '12px 16px',
-                    backgroundColor: 'var(--bg-card)',
-                    border: '1px solid var(--border-color)',
-                    color: 'var(--text-muted)',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    fontSize: '13px',
-                    fontWeight: 500,
-                    outline: 'none'
-                  }}
-                >
-                  <option value="es">🇪🇸 Español</option>
-                  <option value="en">🇺🇸 English</option>
-                </select>
+                  style={{ width: '100%', minWidth: '100%' }}
+                  options={[
+                    { value: "es", label: "🇪🇸 Español" },
+                    { value: "en", label: "🇺🇸 English" }
+                  ]}
+                />
               </div>
               <button onClick={async () => { await logout(); navigate('/login'); }} style={{ display: 'flex', alignItems: 'center', gap: '12px', padding: '14px 16px', color: '#ef4444', background: 'none', border: 'none', fontSize: '13px', fontWeight: 600, cursor: 'pointer', width: '100%', borderRadius: '8px', textAlign: 'left', marginTop: '16px' }}>
                 <LogOut size={16} /> Cerrar Sesión

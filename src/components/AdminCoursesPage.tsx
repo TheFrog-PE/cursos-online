@@ -9,7 +9,7 @@ import { initialCourses } from '../types/courses';
 import type { Course } from '../types/courses';
 import { demoService } from '../services/api';
 import { useAuth } from '../contexts/AuthContext';
-
+import { CustomSelect } from './CustomSelect';
 const statusColors: Record<string, { bg: string; color: string; dot: string }> = {
   'Publicado': { bg: 'rgba(34,197,94,0.1)', color: '#22c55e', dot: '#22c55e' },
   'Borrador':  { bg: 'rgba(245,158,11,0.1)', color: '#f59e0b', dot: '#f59e0b' },
@@ -343,27 +343,29 @@ export const AdminCoursesPage: React.FC<AdminCoursesPageProps> = ({ onEditCourse
       {/* Toolbar */}
       <div style={{ display: 'flex', gap: '12px', alignItems: 'center', marginBottom: '24px', flexWrap: 'wrap' }}>
         {/* Category filter */}
-        <div style={{ position: 'relative' }}>
-          <select
+        <div style={{ position: 'relative', zIndex: 30 }}>
+          <CustomSelect
             value={filterCat}
-            onChange={e => setFilterCat(e.target.value)}
-            style={{ appearance: 'none', backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '10px 36px 10px 14px', color: 'var(--text-main)', fontSize: '12px', cursor: 'pointer', outline: 'none' }}
-          >
-            {categories.map(c => <option key={c} value={c}>{c === 'Todas' ? 'Todas las Categorías' : c}</option>)}
-          </select>
-          <ChevronDown size={12} color="var(--text-muted)" style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+            onChange={setFilterCat}
+            style={{ width: '200px' }}
+            options={categories.map(c => ({
+              value: c,
+              label: c === 'Todas' ? 'Todas las Categorías' : c
+            }))}
+          />
         </div>
 
         {/* Status filter */}
-        <div style={{ position: 'relative' }}>
-          <select
+        <div style={{ position: 'relative', zIndex: 20 }}>
+          <CustomSelect
             value={filterStatus}
-            onChange={e => setFilterStatus(e.target.value)}
-            style={{ appearance: 'none', backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '10px 36px 10px 14px', color: 'var(--text-main)', fontSize: '12px', cursor: 'pointer', outline: 'none' }}
-          >
-            {statuses.map(s => <option key={s} value={s}>{s === 'Todos' ? 'Cualquier Estado' : s}</option>)}
-          </select>
-          <ChevronDown size={12} color="var(--text-muted)" style={{ position: 'absolute', right: '12px', top: '50%', transform: 'translateY(-50%)', pointerEvents: 'none' }} />
+            onChange={setFilterStatus}
+            style={{ width: '200px' }}
+            options={statuses.map(s => ({
+              value: s,
+              label: s === 'Todos' ? 'Cualquier Estado' : s
+            }))}
+          />
         </div>
 
         {/* Search */}
@@ -863,17 +865,21 @@ export const AdminCoursesPage: React.FC<AdminCoursesPageProps> = ({ onEditCourse
               <div className="resp-grid-2" style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '12px' }}>
                 <div>
                   <label style={{ display: 'block', fontSize: '11px', color: 'var(--text-muted)', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Categoría</label>
-                  <select value={form.category} onChange={e => setForm(p => ({ ...p, category: e.target.value }))}
-                    style={{ width: '100%', backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '12px 14px', color: 'var(--text-main)', fontSize: '13px', outline: 'none' }}>
-                    {['Finanzas', 'Arbitraje', 'Legal', 'Seguridad'].map(c => <option key={c}>{c}</option>)}
-                  </select>
+                  <CustomSelect
+                    value={form.category}
+                    onChange={(val) => setForm(p => ({ ...p, category: val }))}
+                    style={{ width: '100%', minWidth: '100%' }}
+                    options={['Finanzas', 'Arbitraje', 'Legal', 'Seguridad'].map(c => ({ value: c, label: c }))}
+                  />
                 </div>
                 <div>
                   <label style={{ display: 'block', fontSize: '11px', color: 'var(--text-muted)', marginBottom: '6px', textTransform: 'uppercase', letterSpacing: '0.08em' }}>Estado</label>
-                  <select value={form.status} onChange={e => setForm(p => ({ ...p, status: e.target.value as Course['status'] }))}
-                    style={{ width: '100%', backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-color)', borderRadius: '8px', padding: '12px 14px', color: 'var(--text-main)', fontSize: '13px', outline: 'none' }}>
-                    {['Publicado', 'Borrador', 'Archivado'].map(s => <option key={s}>{s}</option>)}
-                  </select>
+                  <CustomSelect
+                    value={form.status}
+                    onChange={(val) => setForm(p => ({ ...p, status: val as Course['status'] }))}
+                    style={{ width: '100%', minWidth: '100%' }}
+                    options={['Publicado', 'Borrador', 'Archivado'].map(s => ({ value: s, label: s }))}
+                  />
                 </div>
               </div>
             </div>
