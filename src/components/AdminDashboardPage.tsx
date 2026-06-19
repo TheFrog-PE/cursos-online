@@ -11,7 +11,7 @@ import { ThemeToggle } from './ThemeToggle';
 import { AdminUsersPage } from './AdminUsersPage';
 import { AdminCoursesPage } from './AdminCoursesPage';
 import { StudentFooter } from './StudentFooter';
-
+import { CustomSelect } from './CustomSelect';
 import { AdminCourseEditorPage } from './AdminCourseEditorPage';
 import { AdminPaymentsPage } from './AdminPaymentsPage';
 import { AdminSettingsPage } from './AdminSettingsPage';
@@ -464,51 +464,31 @@ export const AdminDashboardPage: React.FC = () => {
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', gap: '12px', flexWrap: 'wrap' }}>
                       {/* Rol Filter */}
-                      <div style={{ position: 'relative' }}>
-                        <select
+                      <div style={{ position: 'relative', zIndex: 30 }}>
+                        <CustomSelect
                           value={dashRoleFilter}
-                          onChange={e => setDashRoleFilter(e.target.value)}
-                          style={{
-                            backgroundColor: 'var(--overlay-light)',
-                            color: 'var(--text-main)',
-                            border: '1px solid var(--border-color)',
-                            borderRadius: '8px',
-                            padding: '8px 14px',
-                            fontSize: '11px',
-                            cursor: 'pointer',
-                            outline: 'none',
-                            fontWeight: 600
-                          }}
-                        >
-                          <option value="Todos">Rol: Todos</option>
-                          <option value="EDITOR">Rol: EDITOR</option>
-                          <option value="STUDENT">Rol: ESTUDIANTE</option>
-                          <option value="ADMIN">Rol: ADMIN</option>
-                        </select>
+                          onChange={setDashRoleFilter}
+                          options={[
+                            { value: "Todos", label: "Rol: Todos" },
+                            { value: "EDITOR", label: "Rol: EDITOR" },
+                            { value: "STUDENT", label: "Rol: ESTUDIANTE" },
+                            { value: "ADMIN", label: "Rol: ADMIN" }
+                          ]}
+                        />
                       </div>
 
                       {/* Estado Filter */}
-                      <div style={{ position: 'relative' }}>
-                        <select
+                      <div style={{ position: 'relative', zIndex: 20 }}>
+                        <CustomSelect
                           value={dashStatusFilter}
-                          onChange={e => setDashStatusFilter(e.target.value)}
-                          style={{
-                            backgroundColor: 'var(--overlay-light)',
-                            color: 'var(--text-main)',
-                            border: '1px solid var(--border-color)',
-                            borderRadius: '8px',
-                            padding: '8px 14px',
-                            fontSize: '11px',
-                            cursor: 'pointer',
-                            outline: 'none',
-                            fontWeight: 600
-                          }}
-                        >
-                          <option value="Todos">Estado: Todos</option>
-                          <option value="Activo">Estado: Activo</option>
-                          <option value="Pendiente">Estado: Pendiente</option>
-                          <option value="Inactivo">Estado: Inactivo</option>
-                        </select>
+                          onChange={setDashStatusFilter}
+                          options={[
+                            { value: "Todos", label: "Estado: Todos" },
+                            { value: "Activo", label: "Estado: Activo" },
+                            { value: "Pendiente", label: "Estado: Pendiente" },
+                            { value: "Inactivo", label: "Estado: Inactivo" }
+                          ]}
+                        />
                       </div>
 
                       {/* Vista Toggle */}
