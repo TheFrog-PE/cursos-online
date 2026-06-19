@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import {
   Plus, Search, ChevronDown, BookOpen,
   Eye, Edit2, Trash2, Users, Star, X, Upload, ChevronLeft, ChevronRight, LayoutGrid, List, Clock, Play,
-  GraduationCap, TrendingUp, BarChart2, Shield, Award, Banknote
+  GraduationCap, TrendingUp, BarChart2, Shield, Award, Banknote, ArrowLeft
 } from 'lucide-react';
 
 import { initialCourses } from '../types/courses';
@@ -451,14 +451,18 @@ export const AdminCoursesPage: React.FC<AdminCoursesPageProps> = ({ onEditCourse
             alignItems: 'center', 
             gap: '8px', 
             whiteSpace: 'nowrap',
-            backgroundColor: showTrash ? '#ef4444' : 'var(--overlay-light)', 
-            border: showTrash ? 'none' : '1px solid var(--border-color)',
-            color: showTrash ? '#ffffff' : 'var(--text-main)',
+            backgroundColor: showTrash ? '#16a34a' : (trash.length > 0 ? 'rgba(239, 68, 68, 0.1)' : 'var(--overlay-light)'), 
+            border: showTrash ? 'none' : (trash.length > 0 ? '1px solid #ef4444' : '1px solid var(--border-color)'),
+            color: showTrash ? '#ffffff' : (trash.length > 0 ? '#ef4444' : 'var(--text-main)'),
             cursor: 'pointer',
             transition: 'all 0.2s'
           }}
         >
-          <Trash2 size={16} /> {showTrash ? 'Ver Cursos Activos' : `Basurero (${trash.length})`}
+          {showTrash ? (
+            <><ArrowLeft size={16} /> Ver Cursos Activos</>
+          ) : (
+            <><Trash2 size={16} /> Basurero ({trash.length})</>
+          )}
         </button>
 
         {/* Create button */}
