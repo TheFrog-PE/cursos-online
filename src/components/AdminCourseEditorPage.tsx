@@ -750,7 +750,7 @@ export const AdminCourseEditorPage: React.FC<AdminCourseEditorProps> = ({ course
             </div>
             <button
               onClick={onBack}
-              style={{ background: 'var(--overlay-light)', border: '1px solid var(--border-color)', borderRadius: '8px', color: 'var(--text-muted)', padding: '8px 16px', display: 'inline-flex', alignItems: 'center', gap: '6px', fontSize: '11px', fontWeight: 700, cursor: 'pointer', textTransform: 'uppercase', letterSpacing: '0.05em' }}
+              className="btn-volver-admin"
             >
               <ArrowLeft size={12} /> Volver
             </button>
@@ -895,23 +895,7 @@ export const AdminCourseEditorPage: React.FC<AdminCourseEditorProps> = ({ course
                         setCoursesList(prev => [...prev, { id: newId, name: 'Nuevo Curso', icon: 'BookOpen', thumbnail: '' }]);
                         setActiveCourseId(newId);
                       }}
-                      style={{
-                        width: '100%',
-                        padding: '10px',
-                        backgroundColor: 'transparent',
-                        border: '1px dashed var(--overlay-medium)',
-                        borderRadius: '8px',
-                        color: 'var(--text-muted)',
-                        display: 'flex',
-                        alignItems: 'center',
-                        justifyContent: 'center',
-                        gap: '6px',
-                        fontSize: '11px',
-                        fontWeight: 700,
-                        cursor: 'pointer',
-                        letterSpacing: '0.05em',
-                        marginTop: '4px'
-                      }}
+                      className="btn-nuevo-curso-admin"
                     >
                       <Plus size={12} /> NUEVO CURSO
                     </button>

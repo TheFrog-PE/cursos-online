@@ -2854,3 +2854,76 @@ html {
   }
 }
 
+/* Custom Admin Editor Sticky Sidebar and Prominent Buttons */
+.editor-left-column {
+  position: sticky;
+  top: 24px;
+  align-self: start;
+  max-height: calc(100vh - 48px);
+  overflow-y: auto;
+  scrollbar-width: none; /* Firefox */
+}
+.editor-left-column::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+@media (max-width: 900px) {
+  .editor-left-column {
+    position: static !important;
+    max-height: none !important;
+    overflow-y: visible !important;
+  }
+}
+
+.btn-volver-admin {
+  background-color: rgba(0, 78, 187, 0.12) !important;
+  border: 1px solid var(--primary) !important;
+  border-radius: 8px !important;
+  color: var(--primary) !important;
+  padding: 8px 16px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.05em !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.btn-volver-admin:hover {
+  background-color: var(--primary) !important;
+  color: #ffffff !important;
+  box-shadow: 0 0 14px rgba(0, 78, 187, 0.35) !important;
+  transform: translateY(-1px) !important;
+}
+
+.btn-nuevo-curso-admin {
+  width: 100% !important;
+  padding: 12px !important;
+  background-color: rgba(0, 78, 187, 0.15) !important;
+  border: 1px dashed var(--primary) !important;
+  border-radius: 8px !important;
+  color: var(--primary) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  letter-spacing: 0.05em !important;
+  margin-top: 8px !important;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+}
+
+.btn-nuevo-curso-admin:hover {
+  background-color: var(--primary) !important;
+  color: #ffffff !important;
+  border-style: solid !important;
+  box-shadow: 0 0 16px rgba(0, 78, 187, 0.4) !important;
+  transform: translateY(-1px) !important;
+}
+
+
